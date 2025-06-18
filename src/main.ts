@@ -7,11 +7,7 @@ async function bootstrap() {
   
   // Configurar validação global
   app.useGlobalPipes(
-    new ValidationPipe({
-      whitelist: true,
-      transform: true,
-      forbidNonWhitelisted: true,
-    }),
+    // inserir as config aqui para ValidationPipe
   );
   
   // Configurar CORS
