@@ -21,11 +21,12 @@ export class CartService {
     }
 
     // Criar novo carrinho
-    return this.prisma.cart.create({
-      data: {
-        userId: userId || null,
-      },
-    });
+    // return this.prisma.cart.create({
+    //   data: {
+    //     userId: userId || null,
+    //     dataTimeCompleted:
+    //   },
+    // });
   }
 
   async getCart(cartId: string) {

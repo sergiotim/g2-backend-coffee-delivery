@@ -1,6 +1,18 @@
-import { Controller, Get, Post, Body, Param, HttpStatus, HttpCode, Query } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  HttpStatus,
+  HttpCode,
+  Query,
+  Patch,
+  Delete,
+} from '@nestjs/common';
 import { CoffeesService } from './coffees.service';
 import { CreateCoffeeDto } from './dto/create-coffee.dto';
+import { UpdateCoffeeDto } from './dto/update-coffee.dto';
 
 @Controller('coffees')
 export class CoffeesController {
@@ -21,7 +33,7 @@ export class CoffeesController {
     @Query('offset') offset = 0,
   ) {
     const tagsList = tags ? tags.split(',') : [];
-    
+
     return this.coffeesService.searchCoffees({
       start_date: start_date ? new Date(start_date) : undefined,
       end_date: end_date ? new Date(end_date) : undefined,
@@ -44,4 +56,16 @@ export class CoffeesController {
   }
 
   // adicionar outro endpoints
-} 
+  @Patch(':id')
+  async update(
+    @Param('id') id: string,
+    @Body() updateCoffeeDto: UpdateCoffeeDto,
+  ) {
+    return this.coffeesService.update(id, updateCoffeeDto);
+  }
+
+  @Delete(':id')
+  async remove(@Param('id') id: string) {
+    return this.coffeesService.remove(id);
+  }
+}
